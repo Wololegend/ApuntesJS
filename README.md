@@ -211,7 +211,7 @@ setTimeout(function  () {
 
 ## Arrow functions
 
-Son funciones simplificadas que se llaman mediante una variable. Se suelen utilizar para simplificar las llamadas a funciones que empleen funciones como parámetros:
+Son funciones simplificadas. Se suelen utilizar para simplificar las llamadas a funciones que empleen funciones como parámetros:
 
 ```js
 //Función normal
@@ -232,3 +232,137 @@ console.log(sum(2, 2)); //4
 
 console.log(function (a, b) => a + b);
 ```
+
+## Rest operator
+
+Sirve para indicarle a una función que se le va a pasar un número indefinido de argumentos. Este operador los mete en un array de nuestra elección y se señaliza con puntos suspensivos (...):
+
+```js
+const sum = (funvtion() {
+    return function sum(...array) {
+        return array.reduce((a, b) => a + b); // reduce opera con los valores de un array 
+    };                                        // de la forma que le indiquemos
+})();
+
+console.log(sum(1, 2, 3, 4, 5)); //15
+```
+
+## Spread operator
+
+Separa los elementos de un array en elementos individuales.
+
+```js
+// Si igualamos un array a otro, simplemente
+// los dos apuntan a la misma dirección de memoria.
+
+const array1 = ["A", "B", "C"];
+
+var array2 = array1;
+
+array1[0] = "Z";
+
+console.log(array2); //["Z", "B", "C"]
+
+// Pero si utilizamos el Spread Operator
+
+array1[0] = "A";
+
+array2 = [...array1]; // array2 es un vector cuyos elementos son los de array1
+
+console.log(array2); //["A", "B", "C"]
+```
+
+## Destructuring operator
+
+Similar al Spread operator pero para clases:
+
+```js
+const clase = {x: 1, y: 2, z: 3};
+
+// Forma antigua de hacerlo
+var a = clase.x;
+var b = clase.y;
+var c = clase.z;
+
+// Utilizando Destructuring operator
+
+var {x: a, y: b, z: c} = clase;
+```
+
+En clases anidadas funciona así:
+
+```js
+const clase = {
+    c1: {x: 1, y: 2},
+    c2: {x:3, y: 4}
+};
+
+var {c1: {x: a}} = clase;
+
+console.log(a); //1
+```
+
+## Destructuración en vectores
+
+Podemos destructurar un vector de forma cómoda así:
+
+```js
+const [a, b, , d, ,f] = [1, 2, 3, 4, 5, 6];
+
+console.log(a, b, d, f); //1, 2, 4, 6
+```
+
+Podemos observar que cada variable se asigna a un elemento del array según su posición.
+
+También se puede utilizar para intercambiar los valores de variables:
+
+```js
+var a = 1;
+var b = 2;
+
+[a, b] = [b, a];
+
+console.log(a, b); //2, 1
+```
+
+## Destructuración y Rest operator
+
+Podemos utilizar estos dos conceptos para, por ejemplo, eliminar los dos primeros elementos de un array:
+
+```js
+const array1 = [1, 2, 3, 4, 5];
+
+function removeFirstTwo(genericArray) {
+    const [a, b, ...array2] = genericArray;
+
+    console.log("Deleted ", a); //Deleted 1
+    console.log("Deleted ", b); //Deleted 2
+
+    return array2;
+}
+
+const array3 = removeFirstTwo(array1);
+console.log(array3); //[3, 4, 5]
+```
+
+## Utilizar destructuración para pasar parámetros a funciones
+
+En este caso, vamos a destructurar una clase para pasarle sólo los atributos que queremos a una función:
+
+```js
+const clase = {
+    a: 1,
+    b: 2,
+    c: 3
+ // ...
+    z: 27
+};
+
+const printAandB = ({a, b}) => console.log(a, b));
+
+// Le pasamos toda la clase como parámetro, pero realmente sólo
+// le estamos pasando los atributos a y b de esa clase.
+
+printAandB(clase); //1, 2
+```
+
