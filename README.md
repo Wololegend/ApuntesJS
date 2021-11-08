@@ -366,3 +366,29 @@ const printAandB = ({a, b}) => console.log(a, b));
 printAandB(clase); //1, 2
 ```
 
+## Librerías y Requires
+
+En JavaScript no se suelen hacer inserciones de librerías con macros (como los #insert de C).
+
+```js
+// La librería fs tiene un método para
+// leer un fichero.
+
+const fs = require("fs");
+
+fs.readFileSync("README.md", "utf8");
+
+// SALIDA:
+/*
+# Apuntes JavaScript
+
+[Tutorial original](https://www.youtube.com/watch?v=PkZNo7MFNFg)
+
+## Tipos de variables
+
+Las variables en JS pueden ser de cualquier tipo y cambiarse durante la ejecución del programa.
+
+```js
+var X = "Esto es un string";
+*/
+```
